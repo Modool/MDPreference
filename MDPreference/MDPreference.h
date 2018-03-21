@@ -39,13 +39,13 @@ FOUNDATION_EXPORT const unsigned char MDPreferenceVersionString[];
 
 @end
 
-// Support NSKeyValueCoding, 
 @interface MDPreference : NSObject <MDPreference>
 
 @property (nonatomic, weak) id<MDPreference> parent;
 
 @end
 
+// Support NSKeyValueCoding
 @interface MDPreference (NSKeyValueCoding)
 
 /* Return the value of property named key.

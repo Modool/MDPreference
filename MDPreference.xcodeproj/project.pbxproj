@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		08AD79AD20629B35004122D2 /* MDPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AD79AA20629B35004122D2 /* MDPreference.m */; };
-		08AD79AE20629B35004122D2 /* MDPreference.h in Headers */ = {isa = PBXBuildFile; fileRef = 08AD79AB20629B35004122D2 /* MDPreference.h */; };
+		08AD79AE20629B35004122D2 /* MDPreference.h in Headers */ = {isa = PBXBuildFile; fileRef = 08AD79AB20629B35004122D2 /* MDPreference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		08AD79AF20629B35004122D2 /* MDPreference+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 08AD79AC20629B35004122D2 /* MDPreference+Private.h */; };
 		08AD79B92062A0EF004122D2 /* MDPreferenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AD79B82062A0EF004122D2 /* MDPreferenceTests.m */; };
 		08AD79BB2062A0EF004122D2 /* MDPreference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08AD799F20629AE8004122D2 /* MDPreference.framework */; };

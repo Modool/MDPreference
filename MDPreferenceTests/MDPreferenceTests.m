@@ -10,17 +10,15 @@
 
 #import "MDPreference.h"
 
-MDPreferenceClassBegin(MDTestPreference)
+@protocol MDTestPreference <NSObject>
 
 @property (nonatomic, copy) NSString *testProperty;
 
-MDPreferenceClassEnd(MDTestPreference)
-
-MDPreferenceClassImplementation(MDTestPreference)
+@end
 
 @interface MDPreferenceTests : XCTestCase
 
-@property (nonatomic, strong, readonly) MDTestPreference *testPreference;
+@property (nonatomic, strong, readonly) MDPreference<MDTestPreference> *testPreference;
 
 @end
 
@@ -30,7 +28,7 @@ MDPreferenceClassImplementation(MDTestPreference)
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     
-    _testPreference = [[MDTestPreference alloc] init];
+    _testPreference = [[MDPreference<MDTestPreference> alloc] initWithProtocol:@protocol(MDTestPreference)];
 }
 
 - (void)tearDown {

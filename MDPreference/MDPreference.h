@@ -16,32 +16,26 @@ FOUNDATION_EXPORT const unsigned char MDPreferenceVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MDPreference/PublicHeader.h>
 
-#define MDPreferenceClassBegin(ClassName)           \
-@protocol ClassName <NSObject>                      \
-@optional                                           \
-
-#define MDPreferenceClassEnd(ClassName)             \
-@end                                                \
-@interface ClassName : MDPreference<ClassName>      \
-@end                                                \
-
-#define MDPreferenceClassImplementation(ClassName)  \
-@implementation ClassName                           \
-@end
-
 #import "MDPreference.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @class MDPreference;
 @protocol MDPreference <NSObject, NSCoding, NSSecureCoding, NSCopying>
 
 - (void)preference:(MDPreference *)preference willUpdateKey:(NSString *)key value:(id)value;
-- (void)preference:(MDPreference *)preference didUpdateKey:(NSString *)key value:(id)value origin:(id)origin;
+- (void)preference:(MDPreference *)preference didUpdateKey:(NSString *)key value:(id)value origin:(_Nullable id)origin;
 
 @end
 
 @interface MDPreference : NSObject <MDPreference>
 
-@property (nonatomic, weak) id<MDPreference> parent;
+@property (nonatomic, weak, nullable) id<MDPreference> parent;
+
+@property (nonatomic, weak, nullable, readonly) Protocol *protocol;
+
++ (instancetype)preferenceWithProtocol:(Protocol * _Nullable)protocol;
+- (instancetype)initWithProtocol:(Protocol * _Nullable)protocol;
 
 @end
 
@@ -64,5 +58,6 @@ FOUNDATION_EXPORT const unsigned char MDPreferenceVersionString[];
  */
 - (void)setObject:(id<NSObject, NSCopying, NSCoding>)anObject forKeyedSubscript:(NSString *)key;
 
-
 @end
+
+NS_ASSUME_NONNULL_END

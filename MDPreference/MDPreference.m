@@ -6,6 +6,8 @@
 //  Copyright © 2017年 bilibili. All rights reserved.
 //
 
+#import <objc/runtime.h>
+
 #import "MDPreference.h"
 #import "MDPreference+Private.h"
 
@@ -15,6 +17,17 @@ NSString * const MDPreferenceGetPredicateString = @"^[a-z]([a-z]|[A-Z]|[0-9]|_)*
 NSString * const MDPreferenceEncodeKey = @"keyValues";
 
 @implementation MDPreference
+
++ (instancetype)preferenceWithProtocol:(Protocol *)protocol;{
+    return [[self alloc] initWithProtocol:protocol];
+}
+
+- (instancetype)initWithProtocol:(Protocol *)protocol;{
+    if (self = [super init]) {
+        _protocol = protocol;
+    }
+    return self;
+}
 
 #pragma mark - NSCoding
 
@@ -82,6 +95,16 @@ NSString * const MDPreferenceEncodeKey = @"keyValues";
     } else {
         [super forwardInvocation:anInvocation];
     }
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector{
+    struct objc_method_description description = protocol_getMethodDescription(_protocol, aSelector, YES, YES);
+    if (description.name && description.types) return [NSMethodSignature signatureWithObjCTypes:description.types];
+    
+    description = protocol_getMethodDescription(_protocol, aSelector, NO, YES);
+    if (description.name && description.types) return [NSMethodSignature signatureWithObjCTypes:description.types];
+    
+    return [super methodSignatureForSelector:aSelector];
 }
 
 #pragma mark - accessor
@@ -307,3 +330,4 @@ void * MDPreferenceReverseBoxValue(const char *type, id obj, NSUInteger length) 
     }
     return value;
 }
+ 

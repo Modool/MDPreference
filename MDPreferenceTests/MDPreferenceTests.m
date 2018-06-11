@@ -31,19 +31,24 @@
     _testPreference = [[MDPreference<MDTestPreference> alloc] initWithProtocol:@protocol(MDTestPreference)];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testInvockProperty {
+- (void)testInvokeProperty {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     _testPreference.testProperty = @"property_invoke";
     XCTAssertEqual(_testPreference.testProperty, @"property_invoke");
 }
 
-- (void)testInvockPropertySynchronization {
+- (void)testPropertyWithNilValue {
+    // This is an example of a functional test case.
+    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    _testPreference.testProperty = @"property_invoke";
+    XCTAssertNotNil(_testPreference.testProperty);
+    
+    _testPreference.testProperty = nil;
+    XCTAssertNil(_testPreference.testProperty);
+}
+
+- (void)testInvokePropertySynchronization {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     _testPreference.testProperty = @"property_invoke";
@@ -53,7 +58,7 @@
     XCTAssertEqual([_testPreference valueForKey:@"testProperty"], @"property_invoke");
 }
 
-- (void)testInvockKeyValueCoding {
+- (void)testInvokeKeyValueCoding {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     [_testPreference setValue:@"property_kvc" forKey:@"testProperty"];
@@ -61,7 +66,7 @@
     XCTAssertEqual([_testPreference valueForKey:@"testProperty"], @"property_kvc");
 }
 
-- (void)testInvockKeyValueCodingSynchronization {
+- (void)testInvokeKeyValueCodingSynchronization {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     [_testPreference setValue:@"property_kvc" forKey:@"testProperty"];
@@ -71,7 +76,7 @@
     XCTAssertEqual(_testPreference[@"testProperty"], @"property_kvc");
 }
 
-- (void)testInvockUndefineKeyValueCoding {
+- (void)testInvokeUndefineKeyValueCoding {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     _testPreference[@"testProperty"] = @"property_undefine_kvc";
@@ -79,7 +84,7 @@
     XCTAssertEqual(_testPreference[@"testProperty"], @"property_undefine_kvc");
 }
 
-- (void)testInvockUndefineKeyValueCodingSynchronization {
+- (void)testInvokeUndefineKeyValueCodingSynchronization {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     _testPreference[@"testProperty"] = @"property_undefine_kvc";
@@ -88,13 +93,6 @@
     
     XCTAssertEqual(_testPreference.testProperty, @"property_undefine_kvc");
     XCTAssertEqual([_testPreference valueForKey:@"testProperty"], @"property_undefine_kvc");
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
 }
 
 @end

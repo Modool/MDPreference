@@ -51,7 +51,7 @@ NSString * const MDPreferenceEncodeKey = @"keyValues";
 #pragma mark - NSCopy
 
 - (id)copyWithZone:(nullable NSZone *)zone;{
-    MDPreference *preference = [[self class] init];
+    MDPreference *preference = [[[self class] alloc] init];
     preference.keyValues = [[self keyValues] copy];
     
     return preference;

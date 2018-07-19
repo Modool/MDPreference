@@ -44,7 +44,6 @@ drag “MDPreference” directory into your project
 
 ```
 
-
 ## Requirements
 - Requires ARC
 

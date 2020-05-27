@@ -7,14 +7,32 @@
 //
 
 #import "MDPreference.h"
-#import "MDPreference.h"
 
-@interface MDPreference ()
+@interface MDPreferencePropertyInfo : NSObject
 
-@property (nonatomic, strong) NSMutableDictionary *keyValues;
+@property (nonatomic, copy, readonly) NSString *name;
+
+@property (nonatomic, assign, readonly) SEL getter;
+@property (nonatomic, assign, readonly) SEL setter;
+
++ (instancetype)infoWithName:(NSString *)name getter:(SEL)getter setter:(SEL)setter;
+
++ (NSArray<MDPreferencePropertyInfo *> *)propertyInfosWithProtocol:(Protocol *)protocol dictionary:(NSDictionary<NSString *, MDPreferencePropertyInfo *> **)dictionary;
 
 @end
 
-FOUNDATION_EXTERN id MDPreferenceBoxValue(const char *type, ...);
+@interface MDPreference () {
+    @protected
+    NSArray<MDPreferencePropertyInfo *> *_propertyInfos;
 
-FOUNDATION_EXTERN void * MDPreferenceReverseBoxValue(const char *type, id obj, NSUInteger length);
+    @private
+    NSDictionary<NSString *, MDPreferencePropertyInfo *> *_propertyInfoDictionary;
+    NSMutableDictionary *_dictionary;
+    void *_queueTag;
+}
+
+@end
+
+FOUNDATION_EXTERN id MDPreferenceBoxValue(NSInvocation *invocation, NSUInteger index);
+
+FOUNDATION_EXTERN void MDPreferenceReturnValue(NSInvocation *invocation, id obj);
